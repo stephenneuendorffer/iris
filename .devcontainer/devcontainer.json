@@ -1,0 +1,25 @@
+
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/javascript-node
+{
+	"name": "Iris",
+	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"image": "docker.io/library/iris-dev",
+
+	"runArgs": ["--network=host",
+				"--device=/dev/kfd",
+    			"--device=/dev/dri",
+				"--cap-add=SYS_PTRACE",
+				"--group-add", "video",
+				"--security-opt",
+				"seccomp=unconfined",
+            	"--shm-size=16G",
+				"--ulimit", "memlock=-1",
+            	"--ulimit", "stack=67108864"],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "pip install -e .",
+
+	"remoteUser": "root",
+	"updateRemoteUserUID": true
+}
